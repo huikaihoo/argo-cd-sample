@@ -1,0 +1,22 @@
+{{- if .Values.apps.argocd }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-cd
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  project: {{ .Values.apps.argocd }}
+  source:
+    repoURL: https://github.com/huikaihoo/argo-cd-sample.git
+    path: charts/argo-cd
+    targetRevision: {{ .Values.targetRevision }}
+    helm:
+      version: v3
+      valueFiles:
+        - values.{{ .Values.env }}.yaml
+{{- end }}

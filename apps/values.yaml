@@ -1,0 +1,5 @@
+env:
+targetRevision:
+
+apps:
+  argocd: default

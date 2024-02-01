@@ -1,0 +1,6 @@
+env: dev
+
+argo-cd:
+  server:
+    config:
+      url: http://argo-cd-argocd-server.argocd.svc.cluster.local/
