@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-app
+  labels:
+    app: chat-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat-app
+      release: "{{ .Release.Name }}"
+  template:
+    metadata:
+      labels:
+        app: chat-app
+        release: "{{ .Release.Name }}"
+    spec:
+      containers:
+        - name: chat-app
+          image: "{{ .Values.app.image.repo }}:{{ .Values.app.image.tag }}"
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: REDIS_URL
+              value: "redis://chat-app-redis-headless.dev.svc.cluster.local:6379"

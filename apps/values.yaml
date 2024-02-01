@@ -3,3 +3,4 @@ targetRevision:
 
 apps:
   argocd: default
+  chatapp: default

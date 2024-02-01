@@ -1,0 +1,22 @@
+{{- if .Values.apps.chatapp }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: chat-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ .Values.env }}
+  project: {{ .Values.apps.chatapp }}
+  source:
+    repoURL: https://github.com/huikaihoo/argo-cd-sample.git
+    path: charts/chat-app
+    targetRevision: {{ .Values.targetRevision }}
+    helm:
+      version: v3
+      valueFiles:
+        - values.{{ .Values.env }}.yaml
+{{- end }}

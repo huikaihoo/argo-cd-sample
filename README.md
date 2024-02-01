@@ -24,3 +24,11 @@ kubectl delete secret --namespace=argocd -l owner=helm,name=argo-cd
 ```sh
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
+
+## Add chat-app
+```
+# Install dependency
+helm repo add bitnami https://charts.bitnami.com/bitnami
+kubectl create namespace dev
+helm dependency build charts/chat-app
+```

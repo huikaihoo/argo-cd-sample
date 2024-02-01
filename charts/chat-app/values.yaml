@@ -1,0 +1,24 @@
+env:
+
+app:
+  image:
+    repo: chat-app
+    tag: latest
+
+redis:
+  architecture: standalone
+  auth:
+    enabled: false
+  master:
+    resources:
+      requests:
+        cpu: "25m"
+        memory: "64Mi"
+      limits:
+        memory: "256Mi"
+    persistence:
+      enabled: false
+  replica:
+    replicaCount: 0
+    persistence:
+      enabled: false
