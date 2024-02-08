@@ -26,9 +26,19 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 ```
 
 ## Add chat-app
-```
+
+```sh
 # Install dependency
 helm repo add bitnami https://charts.bitnami.com/bitnami
 kubectl create namespace dev
 helm dependency build charts/chat-app
+```
+
+## Upgrade argo-cd
+
+```sh
+# Search for the latest version
+helm search repo argo/argo-cd --versions
+helm search repo argo/argocd-apps --versions
+
 ```
